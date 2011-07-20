@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+           
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
+
+<html>
+  <head>
+    <title>Presentation</title>
+
+    <meta charset='utf-8'>
+    <script
+      src='http://html5slides.googlecode.com/svn/trunk/slides.js'></script>
+  </head>
+  
+  <style>
+    .slides > article:not(.nobackground):not(.biglogo) { background-image:url(logo.jpg) !important; }
+    article.fillall > * { position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 0; margin: 0; border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; z-index: -1; }
+
+  </style>
+
+  <body style='display: none'>
+
+    <section class='slides layout-regular template-default'>
+      
+      <!-- title -->
+      <article>
+        <h1 style="text-align:center">moo4q</h1>
+        <p style="text-align:right; margin-top:3em; list-style:none;">moo4q.com</p>
+      </article>
+      
+      <!-- jquery -->
+      <!--
+      <article class='smaller fillall'>
+        <pre>
+$(function() {
+    var $tab_title_input = $( "#tab_title"), $tab_content_input = $( "#tab_content" );
+    var tab_counter = 2;
+
+    // tabs init with a custom tab template and an "add" callback filling in the content
+    var $tabs = $( "#tabs").tabs({
+      tabTemplate: "&lt;li&gt;&lt;a href='#{href}'&gt;#{label}&lt;/a&gt; &lt;span class='ui-icon ui-icon-close'&gt;Remove Tab&lt;/span&gt;&lt;/li&gt;",
+      add: function( event, ui ) {
+        var tab_content = $tab_content_input.val() || "Tab " + tab_counter + " content.";
+        $( ui.panel ).append( "&lt;p&gt;" + tab_content + "&lt;/p&gt;" );
+      }
+    });
+
+    // modal dialog init: custom buttons and a "close" callback reseting the form inside
+    var $dialog = $( "#dialog" ).dialog({
+      autoOpen: false, modal: true, buttons: {
+        Add: function() { addTab(); $( this ).dialog( "close" ); },
+        Cancel: function() { $( this ).dialog( "close" ); }},
+      open: function() { $tab_title_input.focus(); },
+      close: function() { $form[ 0 ].reset(); } });
+
+    // addTab form: calls addTab function on submit and closes the dialog
+    var $form = $( "form", $dialog ).submit(function() { addTab(); $dialog.dialog( "close" ); return false;  });
+
+    // actual addTab function: adds new tab using the title input from the form above
+    function addTab() {
+      var tab_title = $tab_title_input.val() || "Tab " + tab_counter; 
+      $tabs.tabs( "add", "#tabs-" + tab_counter, tab_title );
+      tab_counter++; }
+
+    // addTab button: just opens the dialog
+    $( "#add_tab" ).button().click(function() { $dialog.dialog( "open" ); });
+
+    // close icon: removing the tab on click
+    // note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
+    $( "#tabs span.ui-icon-close" ).live( "click", function() {
+      var index = $( "li", $tabs ).index( $( this ).parent() );
+      $tabs.tabs( "remove", index ); });
+  });
+  </pre>
+      </article>
+      -->
+
+      <article class='smaller'>
+        <h3>$("#id.entity :crisis")</h3>
+        <q>What is jQuery without the DOM?</q>
+      </article>
+      
+      <article class='smaller'>
+        <pre>var Human = new Class({
+  initialize: function(name, age){
+    this.name = name;
+    this.age = age;
+  },
+  isAlive: true,
+  energy: 1,
+  eat: function(){ this.energy++; }
+});
+
+var bob = new Human('Bob Ross', 50);
+bob.energy; // 1, from the prototype
+bob.eat(); // assigns bobs own energy to 2
+bob.energy; // 2, prototype not checked anymore
+bob.name; // Bob Ross, nothing to do with prototype
+
+var Warrior = new Class({
+  energy: 100,
+  kills: 0,
+  attack: function(target){
+    if (target.energy &lt; this.energy){ target.isAlive = false; this.kills++; }
+    this.energy = this.energy - 5;
+  }
+});
+</pre>
+      </article>
+
+      <article class='smaller'>
+        <pre>
+
+var Ninja = new Class({
+  Extends: Human,
+  Implements: [Warrior],
+  initialize: function(side, name, age){
+    this.side = side;
+    this.parent(name, age);
+  }
+});
+
+var blackNinja = new Ninja('evil', 'Nin Tendo', 'unknown');
+blackNinja.eat(); // inherited from Human
+blackNinja.attack(bob); // copied from Warrior
+bob.isAlive; // false, bob never had a chance
+blackNinja.kills; // 1, from Warrior
+
+var Samurai = new Class({
+  Extends: Human,
+  Implements: [Warrior],
+  side: 'good',
+  energy: 1000
+});
+</pre>
+      </article>
+
+      <article>
+        <h3>MooTools++</h3>
+        <ul class="build">
+          <li>object-oriented (in the classical sense)</li>
+          <li>modular</li>
+          <li>almost CommonJS compliant</li>
+          <li>test-friendly</li>
+          <li>runs outside the browser (node.js anyone?)</li>
+        </ul>
+      </article>
+      
+      <article>
+        <h1>So MooTools is the shiz.</h1>
+        <p>well... kinda</p>
+      </article>
+
+      <article class="fill">
+        <h3>
+          MooTools + jQuery: will it blend?
+        </h3>
+        <p>
+          <img src="http://farm1.static.flickr.com/55/133903296_e9da1d9cf5.jpg" />
+        </p>
+        <span class="source white">
+        <a href="http://www.flickr.com/photos/redjar/133903296/" class="white" style="text-decoration:none;">photo</a> by <a href="http://www.flickr.com/photos/redjar/" class="white" style="text-decoration:none;">redjar</a>
+        </span>
+      </article>
+
+      <article class="">
+        <pre>
+
+var Person = new Class({
+  Implements: Options,
+  options: {
+    height: 'tall',
+    weight: 'fat'
+  },
+  jQuery: 'person', /* &lt;-------- the magic wand */
+  awesome: true,
+  initialize: function(selector, options){
+    this.setOptions(options);
+    this.jqueryObject = jQuery(selector);
+  },
+  dance: function(whichDance){
+    alert(whichDance);
+    return this;
+  }
+});
+</pre>
+      </article>
+
+      <article class="">
+        <h3>MooTools-like API (regular JS)</h3>
+        <pre>
+var bob = new Person('#bob',{ height: 'short' });
+bob.dance('salsa'); // dances the salsa and returns bob
+bob.awesome; // returns true
+bob.awesome = false; // set the property to something else
+</pre>
+        <h3>jQuery API</h3>
+        <pre>
+$('#bob').person({ height: 'short' }); // instantiate with options
+$('#bob').person(); // returns the class instance
+$('#bob').person('dance', 'salsa'); // returns jQuery object
+$('#bob').person('awesome'); // returns true
+$('#bob').person('awesome', false); // reassign the property
+</pre>
+      </article>
+      
+      <article class="fillall">
+        <pre>
+
+var Tabs = new Class({
+  Implements: [Options, Events], 
+  options: {tab: '.nav', content: '.section', currentClass: 'current'},
+  jQuery: 'tabs', // namespace for new jQuery prototype method
+
+  initialize: function(selector, options){
+    this.setOptions(options); // inherited from Options, like jQuery.extend();
+    this.container = jQuery(selector); // cache the jQuery object
+    this.tabs = this.container.find(this.options.tab);
+    this.contents = this.container.find(this.options.content);
+    this.currentTab = jQuery(this.contents[0]);
+    this.proxied = {
+      tabClick: jQuery.proxy(this.tabClickHandler, this)
+    };
+    this.setup().attach(); // can chain if methods return `this`
+    jQuery(this.tabs[0]).trigger('click', true);
+  }
+  ...
+});
+
+// usage
+$('#pane').tabs({tab: 'a', content: '.section'});
+</pre>
+</pre>
+      </article>
+
+      <article>
+        <h1 style="color:gray;">jasonkarns</h2>
+        <ul>
+          <li><a href='http://www.jasonkarns.com' style="text-decoration:none; color:#333;">jasonkarns.com</a></li>
+          <li><a href="http://twitter.com/jasonkarns" style="text-decoration:none; color:#333;">@jasonkarns</a></li>
+        </ul>
+      </article>
+
+      </section>
+  </body>
+</html>
