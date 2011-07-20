@@ -34,7 +34,7 @@
       <!-- title -->
       <article>
         <h1 style="text-align:center">moo4q</h1>
-        <p style="text-align:right; margin-top:3em;">jasonkarns</p>
+        <p style="text-align:right; margin-top:3em; list-style:none;">moo4q.com</p>
       </article>
       
       <!-- jquery -->
@@ -172,7 +172,7 @@ var Samurai = new Class({
         </span>
       </article>
 
-      <article class="smaller fillall">
+      <article class="">
         <pre>
 
 var Person = new Class({
@@ -181,7 +181,7 @@ var Person = new Class({
     height: 'tall',
     weight: 'fat'
   },
-  jQuery: 'person', /* &lt;-------- the hawtness */
+  jQuery: 'person', /* &lt;-------- the magic wand */
   awesome: true,
   initialize: function(selector, options){
     this.setOptions(options);
@@ -192,38 +192,37 @@ var Person = new Class({
     return this;
   }
 });
+</pre>
+      </article>
 
-// regular javascript api
-var bob = new Person('#dude',{ height: 'short' });
+      <article class="">
+        <h3>MooTools-like API (regular JS)</h3>
+        <pre>
+var bob = new Person('#bob',{ height: 'short' });
 bob.dance('salsa'); // dances the salsa and returns bob
 bob.awesome; // returns true
 bob.awesome = false; // set the property to something else
-
-// jQuery api
+</pre>
+        <h3>jQuery API</h3>
+        <pre>
 $('#bob').person({ height: 'short' }); // instantiate with options
-$('#bob').person(); // returns the class instance since it's already been instantiated (like 'bob' above)
-$('#bob').person('dance', 'salsa'); // dance the salsa and returns the jQuery object because the class returns `this`, (magic from the mutator)
-$('#dude').person('awesome'); // returns true, not the jQuery object because the method doesn't return the instance, it returns a value
-$('#dude').person('awesome', false); // reassign the property
-
-
+$('#bob').person(); // returns the class instance
+$('#bob').person('dance', 'salsa'); // returns jQuery object
+$('#bob').person('awesome'); // returns true
+$('#bob').person('awesome', false); // reassign the property
 </pre>
       </article>
-<!--
-      <article class="smaller fillall">
+      
+      <article class="fillall">
         <pre>
+
 var Tabs = new Class({
   Implements: [Options, Events], 
-    options: {
-      tab: '.nav',
-      content: '.section',
-      currentClass: 'current'
-    },
-
+  options: {tab: '.nav', content: '.section', currentClass: 'current'},
   jQuery: 'tabs', // namespace for new jQuery prototype method
 
   initialize: function(selector, options){
-    this.setOptions(options); // inherited from Options, works like jQuery.extend();
+    this.setOptions(options); // inherited from Options, like jQuery.extend();
     this.container = jQuery(selector); // cache the jQuery object
     this.tabs = this.container.find(this.options.tab);
     this.contents = this.container.find(this.options.content);
@@ -233,36 +232,21 @@ var Tabs = new Class({
     };
     this.setup().attach(); // can chain if methods return `this`
     jQuery(this.tabs[0]).trigger('click', true);
-  },
-  
-  tabClickHandler: function(event, force){
-    event.preventDefault();
-    var index = this.tabs.index(event.currentTarget);
-    if (force || this.contents.index(this.currentTab[0]) != index) this.show(index);
-  },
-
-  show: function(index){
-    this.fireEvent('show'); // like a callback
-    this.tabs.removeClass(this.options.currentClass);
-    jQuery(this.tabs[index]).addClass(this.options.currentClass);
-    this.currentTab.hide();
-    this.currentTab = jQuery(this.contents[index]).show();
-    return this;
   }
+  ...
 });
 
 // usage
 $('#pane').tabs({tab: 'a', content: '.section'});
 </pre>
+</pre>
       </article>
--->
 
       <article>
         <h1 style="color:gray;">jasonkarns</h2>
         <ul>
           <li><a href='http://www.jasonkarns.com' style="text-decoration:none; color:#333;">jasonkarns.com</a></li>
           <li><a href="http://twitter.com/jasonkarns" style="text-decoration:none; color:#333;">@jasonkarns</a></li>
-          <li><a href="mailto:jason@karns.name" style="text-decoration:none; color:#333;">jason@karns.name</a></li>
         </ul>
       </article>
 
