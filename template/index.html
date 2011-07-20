@@ -22,349 +22,250 @@
   </head>
   
   <style>
-    /* Your individual styles here, or just use inline styles if that’s
-       what you want. */
-    
-    
+    .slides > article:not(.nobackground):not(.biglogo) { background-image:url(http://cardinalsolutions.com/images/top_slices_01.gif) !important; }
+    article.fillall > * { position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 0; margin: 0; border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; z-index: -1; }
+
   </style>
 
   <body style='display: none'>
 
     <section class='slides layout-regular template-default'>
       
-      <!-- Your slides (<article>s) go here. Delete or comment out the
-           slides below. -->
-        
-        
-      
-      <article class='biglogo'>
-      </article>
-
+      <!-- title -->
       <article>
-        <h1>
-          Title Goes Here Up
-          <br>
-          To Two Lines
-        </h1>
-        <p>
-          Sergey Brin
-          <br>
-          May 10, 2011
-        </p>
+        <h1 style="text-align:center">moo4q</h1>
+        <p style="text-align:right; margin-top:3em;">jasonkarns</p>
       </article>
       
-      <article>
-        <p>
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-        </p>
-        <p>
-          There is more text just underneath.
-        </p>
-      </article>
+      <!-- jquery -->
+      <!--
+      <article class='smaller fillall'>
+        <pre>
+$(function() {
+    var $tab_title_input = $( "#tab_title"), $tab_content_input = $( "#tab_content" );
+    var tab_counter = 2;
 
-      <article>
-        <h3>
-          Simple slide with header and text
-        </h3>
-        <p>
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-        </p>
-        <p>
-          There is more text just underneath with a <code>code sample: 5px</code>.
-        </p>
+    // tabs init with a custom tab template and an "add" callback filling in the content
+    var $tabs = $( "#tabs").tabs({
+      tabTemplate: "&lt;li&gt;&lt;a href='#{href}'&gt;#{label}&lt;/a&gt; &lt;span class='ui-icon ui-icon-close'&gt;Remove Tab&lt;/span&gt;&lt;/li&gt;",
+      add: function( event, ui ) {
+        var tab_content = $tab_content_input.val() || "Tab " + tab_counter + " content.";
+        $( ui.panel ).append( "&lt;p&gt;" + tab_content + "&lt;/p&gt;" );
+      }
+    });
+
+    // modal dialog init: custom buttons and a "close" callback reseting the form inside
+    var $dialog = $( "#dialog" ).dialog({
+      autoOpen: false, modal: true, buttons: {
+        Add: function() { addTab(); $( this ).dialog( "close" ); },
+        Cancel: function() { $( this ).dialog( "close" ); }},
+      open: function() { $tab_title_input.focus(); },
+      close: function() { $form[ 0 ].reset(); } });
+
+    // addTab form: calls addTab function on submit and closes the dialog
+    var $form = $( "form", $dialog ).submit(function() { addTab(); $dialog.dialog( "close" ); return false;  });
+
+    // actual addTab function: adds new tab using the title input from the form above
+    function addTab() {
+      var tab_title = $tab_title_input.val() || "Tab " + tab_counter; 
+      $tabs.tabs( "add", "#tabs-" + tab_counter, tab_title );
+      tab_counter++; }
+
+    // addTab button: just opens the dialog
+    $( "#add_tab" ).button().click(function() { $dialog.dialog( "open" ); });
+
+    // close icon: removing the tab on click
+    // note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
+    $( "#tabs span.ui-icon-close" ).live( "click", function() {
+      var index = $( "li", $tabs ).index( $( this ).parent() );
+      $tabs.tabs( "remove", index ); });
+  });
+  </pre>
+      </article>
+      -->
+
+      <article class='smaller'>
+        <h3>$("#id.entity :crisis")</h3>
+        <q>What is jQuery without the DOM?</q>
+      </article>
+      
+      <article class='smaller'>
+        <pre>var Human = new Class({
+  initialize: function(name, age){
+    this.name = name;
+    this.age = age;
+  },
+  isAlive: true,
+  energy: 1,
+  eat: function(){ this.energy++; }
+});
+
+var bob = new Human('Bob Ross', 50);
+bob.energy; // 1, from the prototype
+bob.eat(); // assigns bobs own energy to 2
+bob.energy; // 2, prototype not checked anymore
+bob.name; // Bob Ross, nothing to do with prototype
+
+var Warrior = new Class({
+  energy: 100,
+  kills: 0,
+  attack: function(target){
+    if (target.energy &lt; this.energy){ target.isAlive = false; this.kills++; }
+    this.energy = this.energy - 5;
+  }
+});
+</pre>
       </article>
 
       <article class='smaller'>
-        <h3>
-          Simple slide with header and text (small font)
-        </h3>
-        <p>
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-        </p>
-        <p>
-          There is more text just underneath with a <code>code sample: 5px</code>.
-        </p>
+        <pre>
+
+var Ninja = new Class({
+  Extends: Human,
+  Implements: [Warrior],
+  initialize: function(side, name, age){
+    this.side = side;
+    this.parent(name, age);
+  }
+});
+
+var blackNinja = new Ninja('evil', 'Nin Tendo', 'unknown');
+blackNinja.eat(); // inherited from Human
+blackNinja.attack(bob); // copied from Warrior
+bob.isAlive; // false, bob never had a chance
+blackNinja.kills; // 1, from Warrior
+
+var Samurai = new Class({
+  Extends: Human,
+  Implements: [Warrior],
+  side: 'good',
+  energy: 1000
+});
+</pre>
       </article>
 
       <article>
-        <h3>
-          Slide with bullet points and a longer title, just because we
-          can make it longer
-        </h3>
-        <ul>
-          <li>
-            Use this template to create your presentation
-          </li>
-          <li>
-            Use the provided color palette, box and arrow graphics, and
-            chart styles
-          </li>
-          <li>
-            Instructions are provided to assist you in using this
-            presentation template effectively
-          </li>
-          <li>
-            At all times strive to maintain Google's corporate look and feel
-          </li>
-        </ul>
-      </article>
-
-      <article>
-        <h3>
-          Slide with bullet points that builds
-        </h3>
+        <h3>MooTools++</h3>
         <ul class="build">
-          <li>
-            This is an example of a list
-          </li>
-          <li>
-            The list items fade in
-          </li>
-          <li>
-            Last one!
-          </li>
-        </ul>
-
-        <div class="build">
-          <p>Any element with child nodes can build.</p>
-          <p>It doesn't have to be a list.</p>
-        </div>
-      </article>
-
-      <article class='smaller'>
-        <h3>
-          Slide with bullet points (small font)
-        </h3>
-        <ul>
-          <li>
-            Use this template to create your presentation
-          <li>
-            Use the provided color palette, box and arrow graphics, and
-            chart styles
-          <li>
-            Instructions are provided to assist you in using this
-            presentation template effectively
-          <li>
-            At all times strive to maintain Google's corporate look and feel
-        </ul>
-      </article>
-
-      <article>
-        <h3>
-          Slide with a table
-        </h3>
-        
-        <table>
-          <tr>
-            <th>
-              Name
-            <th>
-              Occupation
-          <tr>
-            <td>
-              Luke Mahé
-            <td>
-              V.P. of Keepin’ It Real
-          <tr>
-            <td>
-              Marcin Wichary
-            <td>
-              The Michael Bay of Doodles
-        </table>
-      </article>
-      
-      <article class='smaller'>
-        <h3>
-          Slide with a table (smaller text)
-        </h3>
-        
-        <table>
-          <tr>
-            <th>
-              Name
-            <th>
-              Occupation
-          <tr>
-            <td>
-              Luke Mahé
-            <td>
-              V.P. of Keepin’ It Real
-          <tr>
-            <td>
-              Marcin Wichary
-            <td>
-              The Michael Bay of Doodles
-        </table>
-      </article>
-      
-      <article>
-        <h3>
-          Styles
-        </h3>
-        <ul>
-          <li>
-            <span class='red'>class="red"</span>
-          <li>
-            <span class='blue'>class="blue"</span>
-          <li>
-            <span class='green'>class="green"</span>
-          <li>
-            <span class='yellow'>class="yellow"</span>
-          <li>
-            <span class='black'>class="black"</span>
-          <li>
-            <span class='white'>class="white"</span>
-          <li>
-            <b>bold</b> and <i>italic</i>
+          <li>object-oriented (in the classical sense)</li>
+          <li>modular</li>
+          <li>almost CommonJS compliant</li>
+          <li>test-friendly</li>
+          <li>runs outside the browser (node.js anyone?)</li>
         </ul>
       </article>
       
       <article>
-        <h2>
-          Segue slide
-        </h2>
+        <h1>So MooTools is the shiz.</h1>
+        <p>well... kinda</p>
       </article>
 
-      <article>
+      <article class="fill">
         <h3>
-          Slide with an image
+          MooTools + jQuery: will it blend?
         </h3>
         <p>
-          <img style='height: 500px' src='images/example-graph.png'>
+          <img src="http://farm1.static.flickr.com/55/133903296_e9da1d9cf5.jpg" />
         </p>
-        <div class='source'>
-          Source: Sergey Brin
-        </div>
+        <span class="source white">
+        <a href="http://www.flickr.com/photos/redjar/133903296/" class="white" style="text-decoration:none;">photo</a> by <a href="http://www.flickr.com/photos/redjar/" class="white" style="text-decoration:none;">redjar</a>
+        </span>
       </article>
 
-      <article>
-        <h3>
-          Slide with an image (centered)
-        </h3>
-        <p>
-          <img class='centered' style='height: 500px' src='images/example-graph.png'>
-        </p>
-        <div class='source'>
-          Source: Larry Page
-        </div>
-      </article>
-
-      <article class='fill'>
-        <h3>
-          Image filling the slide (with optional header)
-        </h3>
-        <p>
-          <img src='images/example-cat.jpg'>
-        </p>
-        <div class='source white'>
-          Source: Eric Schmidt
-        </div>
-      </article>
-
-      <article>
-        <h3>
-          This slide has some code
-        </h3>
-        <section>
+      <article class="smaller fillall">
         <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
+
+var Person = new Class({
+  Implements: Options,
+  options: {
+    height: 'tall',
+    weight: 'fat'
+  },
+  jQuery: 'person', /* &lt;-------- the hawtness */
+  awesome: true,
+  initialize: function(selector, options){
+    this.setOptions(options);
+    this.jqueryObject = jQuery(selector);
+  },
+  dance: function(whichDance){
+    alert(whichDance);
+    return this;
   }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
+});
+
+// regular javascript api
+var bob = new Person('#dude',{ height: 'short' });
+bob.dance('salsa'); // dances the salsa and returns bob
+bob.awesome; // returns true
+bob.awesome = false; // set the property to something else
+
+// jQuery api
+$('#bob').person({ height: 'short' }); // instantiate with options
+$('#bob').person(); // returns the class instance since it's already been instantiated (like 'bob' above)
+$('#bob').person('dance', 'salsa'); // dance the salsa and returns the jQuery object because the class returns `this`, (magic from the mutator)
+$('#dude').person('awesome'); // returns true, not the jQuery object because the method doesn't return the instance, it returns a value
+$('#dude').person('awesome', false); // reassign the property
+
+
 </pre>
-        </section>
       </article>
-      
-      <article class='smaller'>
-        <h3>
-          This slide has some code (small font)
-        </h3>
-        <section>
+<!--
+      <article class="smaller fillall">
         <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
+var Tabs = new Class({
+  Implements: [Options, Events], 
+    options: {
+      tab: '.nav',
+      content: '.section',
+      currentClass: 'current'
+    },
+
+  jQuery: 'tabs', // namespace for new jQuery prototype method
+
+  initialize: function(selector, options){
+    this.setOptions(options); // inherited from Options, works like jQuery.extend();
+    this.container = jQuery(selector); // cache the jQuery object
+    this.tabs = this.container.find(this.options.tab);
+    this.contents = this.container.find(this.options.content);
+    this.currentTab = jQuery(this.contents[0]);
+    this.proxied = {
+      tabClick: jQuery.proxy(this.tabClickHandler, this)
+    };
+    this.setup().attach(); // can chain if methods return `this`
+    jQuery(this.tabs[0]).trigger('click', true);
+  },
+  
+  tabClickHandler: function(event, force){
+    event.preventDefault();
+    var index = this.tabs.index(event.currentTarget);
+    if (force || this.contents.index(this.currentTab[0]) != index) this.show(index);
+  },
+
+  show: function(index){
+    this.fireEvent('show'); // like a callback
+    this.tabs.removeClass(this.options.currentClass);
+    jQuery(this.tabs[index]).addClass(this.options.currentClass);
+    this.currentTab.hide();
+    this.currentTab = jQuery(this.contents[index]).show();
+    return this;
   }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
+});
+
+// usage
+$('#pane').tabs({tab: 'a', content: '.section'});
 </pre>
-        </section>
       </article>
-      
-      <article>
-        <q>
-          The best way to predict the future is to invent it.
-        </q>
-        <div class='author'>
-          Alan Kay
-        </div>
-      </article>
-      
-      <article class='smaller'>
-        <q>
-          A distributed system is one in which the failure of a computer 
-          you didn’t even know existed can render your own computer unusable.
-        </q>
-        <div class='author'>
-          Leslie Lamport
-        </div>
-      </article>
-      
-      <article class='nobackground'>
-        <h3>
-          A slide with an embed + title
-        </h3>
-        
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
+-->
 
-      <article class='nobackground'>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
-
-      <article class='fill'>
-        <h3>
-          Full-slide embed with (optional) slide title on top
-        </h3>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
-      
       <article>
-        <h3>
-          Thank you!
-        </h3>
-        
+        <h1 style="color:gray;">jasonkarns</h2>
         <ul>
-          <li>
-            <a href='http://www.google.com'>google.com</a>
+          <li><a href='http://www.jasonkarns.com' style="text-decoration:none; color:#333;">jasonkarns.com</a></li>
+          <li><a href="http://twitter.com/jasonkarns" style="text-decoration:none; color:#333;">@jasonkarns</a></li>
+          <li><a href="mailto:jason@karns.name" style="text-decoration:none; color:#333;">jason@karns.name</a></li>
         </ul>
       </article>
 
-    </section>
-
+      </section>
   </body>
 </html>
