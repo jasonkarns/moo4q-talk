@@ -25,6 +25,12 @@
     .slides > article:not(.nobackground):not(.biglogo) { background-image:url(logo.jpg) !important; }
     article.fillall > * { position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 0; margin: 0; border-radius: 10px; -o-border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; z-index: -1; }
 
+	article.smaller p,
+	article.smaller ul,
+	article.smaller ol,
+	article.smaller dl { font-size: 20px; line-height: 24px; letter-spacing: 0; }
+	
+	article dt { margin-top:1em; }
   </style>
 
   <body style='display: none'>
@@ -36,6 +42,102 @@
         <h1 style="text-align:center">moo4q</h1>
         <p style="text-align:right; margin-top:3em; list-style:none;">moo4q.com</p>
       </article>
+	  
+<article class="smaller nobackground">	
+<h3>Sequences</h3>
+<ul>
+<li>Sequences for primary keys are assumed to be the tablename + '_seq'.<br/> (e.g. <code>ppak_cases_seq</code>)</li>
+</ul>
+<h5>Exception</h5>
+<ul>
+<li>If the sequence does not follow the convention, it must be specified via <code>set_sequence_name</code>.
+<pre><code>class PpakParticModelSelection
+  # assumed to be :ppak_partic_model_selection_seq
+  set_sequence_name :ppak_partic_model_select_seq
+end
+</code></pre>
+</li>
+</ul>
+</article>
+
+	  
+<article class='smaller nobackground'>
+<h3>Aliases</h3>
+<ul>
+<li>IktivRecord automatically creates an alias for every association without the <code>ppa*</code> prefix. So you can use <code>case.contracts</code> instead of <code>case.ppak_contracts</code></li>
+<li>You can also define your own aliases. Convention: create aliases without abbreviations. This eliminates the need to guess what form of abbreviation was used.</p>
+<pre><code>person = PpakPerson.new
+# before (ugly)
+person.partic_enrlmnts
+# with alias_attribute :enrollments :ppak_partic_enrlmnts defined
+person.enrollments
+
+model = PpakModel.new
+# before (redundant)
+model.model_versions
+# with alias_attribute :versions :ppak_model_versions
+model.versions
+</code></pre>
+</li>
+</ul>
+</article>
+
+	  
+<article class='smaller'>
+<h3>Foreign Key Overrides</h3>
+<ul>
+	<li>Not all tables in keynote follow the table_name + _seq_id convention for foreign_keys</li>
+	<li>Even without the convention, many are still very consistent:
+	<ul>
+		<li>ppak_invest_option is almost always <code>ivop_seq_id</code></li>
+		<li>ppak_partic_enrlmnt is usually <code>partic_seq_id</code></li>
+	</ul></li>
+	<li>These consistent convention-breakers can be specified in one location to avoid duplication across all classes
+	<pre><code># config/initializers/inflections.rb
+ActiveSupport::Inflector.inflections do |inflect|
+  inflect.foreign_key :ppak_contract => :cont_seq_id # or :acct_owner_cont_seq_id
+  inflect.foreign_key :ppak_invest_option => :ivop_seq_id
+  inflect.foreign_key :ppak_partic_enrlmnt => :partic_seq_id # or :acct_owner_partic_seq_id
+end</code></pre>
+	</li>
+</ul>
+</article>
+
+<article class='smaller'>
+<h3>When definining an association, ask yourself:</h3>
+
+<dl>
+	<dt>Does the foreign_key use the <kbd>table_name + _seq_id</kbd> convention?</dt>
+	<dd>Yes: you're done. You don't need to specify a foreign_key</dd>
+	<dd>Otherwise&hellip;</dd>
+	
+	<dt>Is the foreign_key already declared in <kbd>inflections.rb</kbd>?</dt>
+	<dd>Yes: you're done. You don't need to specify a foreign_key</dd>
+	<dd>Otherwise&hellip;</dd>
+	
+	<dt>Is the foreign_key already declared in <kbd>inflections.rb</kbd> with a <em>different</em> value?</dt>
+	<dd>Yes: Specify the foreign_key explicitly with the association</dd>
+
+	<dt>Does the foreign_key use it's own consistent naming scheme?</dt>
+	<dd>Yes: add it to <kbd class='smaller'>inflections.rb</kbd></dd>
+	<dd>No: Specify the foreign_key explicitly with the association</dd>
+	
+</dl>
+</article>
+<article>
+<h3>Foreign Keys are defined in ONE of the following ways:</h3>
+<ol>
+	<li>inferred to be <kbd>table_name + '_seq_id'</kbd>
+	<pre><code>belongs_to :ppak_case</pre></code></li>
+	<li>defined in <kbd>config/initializers/inflections.rb</kbd>
+	<pre><code>ActiveSupport::Inflector.inflections do |inflect|
+  inflect.foreign_key :ppak_invest_option => :ivop_seq_id
+end</code></pre></li>
+	<li>defined explicitly on the association itself
+	<pre><code>belongs_to :ppak_contract, :foreign_key => :acct_owner_cont_seq_id</code></pre></li>
+</ol>
+</article>
+	  
       
       <!-- jquery -->
       <!--
